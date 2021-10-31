@@ -9,8 +9,13 @@ import { sessionController } from '@useCases/Session';
 import { createRoleController } from '@useCases/CreateRole';
 import { createConnectionUserRoleController } from '@useCases/CreateConnectionUserRole';
 import { createSubscriptionController } from '@useCases/CreateSubscription';
+import { getSubscriptionController } from '@useCases/GetSubscriptions';
 
 const router = Router();
+
+/*
+ * Users Routes
+ */
 
 router.post('/create_users', (request: Request, response: Response) =>
 	createUserController.handle(request, response)
@@ -26,6 +31,10 @@ router.get(
 	(request: Request, response: Response) =>
 		getUsersController.handle(request, response)
 );
+
+/*
+ * Roles Routes
+ */
 
 router.post(
 	'/create_roles',
@@ -43,10 +52,22 @@ router.post(
 		createConnectionUserRoleController.handle(request, response)
 );
 
+/*
+ * Subscriptions Routes
+ */
+
 router.post(
 	'/create_subcription',
 	async (request: Request, response: Response) =>
 		createSubscriptionController.handle(request, response)
+);
+
+router.get(
+	'/all_subcription',
+	is(['admin']),
+	ensuredAuthenticated(),
+	async (request: Request, response: Response) =>
+		getSubscriptionController.handle(request, response)
 );
 
 export { router };

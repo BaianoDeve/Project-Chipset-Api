@@ -10,11 +10,11 @@
 		"forceConsistentCasingInFileNames": true,
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["src/*"],
 			"@middlewares/*": ["src/middlewares/*"],
 			"@repositories/*": ["src/repositories/*"],
 			"@useCases/*": ["src/useCases/*"],
-			"@providers/*": ["src/providers/*"]
+			"@providers/*": ["src/providers/*"],
+			"@/*": ["src/*"]
 		},
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true

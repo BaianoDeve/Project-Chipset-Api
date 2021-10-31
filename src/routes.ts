@@ -8,6 +8,7 @@ import { getUsersController } from '@useCases/GetUsers';
 import { sessionController } from '@useCases/Session';
 import { createRoleController } from '@useCases/CreateRole';
 import { createConnectionUserRoleController } from '@useCases/CreateConnectionUserRole';
+import { createSubscriptionController } from '@useCases/CreateSubscription';
 
 const router = Router();
 
@@ -40,6 +41,12 @@ router.post(
 	ensuredAuthenticated(),
 	async (request: Request, response: Response) =>
 		createConnectionUserRoleController.handle(request, response)
+);
+
+router.post(
+	'/create_subcription',
+	async (request: Request, response: Response) =>
+		createSubscriptionController.handle(request, response)
 );
 
 export { router };

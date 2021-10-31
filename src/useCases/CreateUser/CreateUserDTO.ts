@@ -1,3 +1,3 @@
-import { User } from '@repositories/IUserRepository';
+import { User } from '@repositories/IUsersRepository';
 
 export type CreateUserRequestDTO = User;

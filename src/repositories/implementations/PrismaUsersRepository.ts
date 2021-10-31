@@ -1,5 +1,5 @@
 import { prisma } from '@/prisma';
-import { IUsersRepository, User } from '@repositories/IUserRepository';
+import { IUsersRepository, User } from '@repositories/IUsersRepository';
 
 export class UsersRepository implements IUsersRepository {
 	async findByUsername(username: string) {

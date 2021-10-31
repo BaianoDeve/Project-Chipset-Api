@@ -1,5 +1,5 @@
 import { IHashProvider } from '@providers/IHashProvider';
-import { IUsersRepository } from '@repositories/IUserRepository';
+import { IUsersRepository } from '@repositories/IUsersRepository';
 import { CreateUserRequestDTO } from './CreateUserDTO';
 
 export class CreateUserService {

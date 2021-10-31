@@ -1,10 +1,10 @@
 import { RolesRepository } from '@repositories/implementations/PrismaRolesRepository';
-import { CreateUserRoleRequestDTO } from './CreateUserRoleDTO';
+import { CreateConnectionUserRoleRequestDTO } from './CreateConnectionUserRoleDTO';
 
-export class CreateUserRoleService {
+export class CreateConnectionUserRoleService {
 	constructor(private rolesRepository: RolesRepository) {}
 
-	async execute({ userId, roleId }: CreateUserRoleRequestDTO) {
+	async execute({ userId, roleId }: CreateConnectionUserRoleRequestDTO) {
 		const conectRole = await this.rolesRepository.connectUserOnRole(
 			userId,
 			roleId

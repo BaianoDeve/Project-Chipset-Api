@@ -7,7 +7,7 @@ import { createUserController } from '@useCases/CreateUser';
 import { getUsersController } from '@useCases/GetUsers';
 import { sessionController } from '@useCases/Session';
 import { createRoleController } from '@useCases/CreateRole';
-import { createUserRoleController } from '@useCases/CreateUserRole';
+import { createConnectionUserRoleController } from '@useCases/CreateConnectionUserRole';
 
 const router = Router();
 
@@ -39,7 +39,7 @@ router.post(
 	is(['admin']),
 	ensuredAuthenticated(),
 	async (request: Request, response: Response) =>
-		createUserRoleController.handle(request, response)
+		createConnectionUserRoleController.handle(request, response)
 );
 
 export { router };

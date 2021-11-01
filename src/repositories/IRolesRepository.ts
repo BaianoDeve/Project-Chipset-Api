@@ -8,6 +8,6 @@ export type UsersRoles = {
 
 export interface IRolesRepository {
 	exists(name: string): Promise<boolean>;
-	saveRole(data: Role): Promise<Role>;
+	save(data: Role): Promise<Role>;
 	connectUserOnRole(userId: string, roleId: string): Promise<UsersRoles>;
 }

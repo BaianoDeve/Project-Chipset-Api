@@ -15,9 +15,7 @@ export class CreateUserService {
 		password,
 		avatar_url,
 	}: CreateUserRequestDTO) {
-		const userAlreadyExists = await this.usersRepository.findByUsername(
-			username
-		);
+		const userAlreadyExists = await this.usersRepository.exists(username);
 
 		if (userAlreadyExists) {
 			throw new Error('User already exists!');
@@ -32,7 +30,7 @@ export class CreateUserService {
 			password: passwordHash,
 		});
 
-		const user = await this.usersRepository.saveUser(userCreate);
+		const user = await this.usersRepository.save(userCreate);
 
 		return user;
 	}

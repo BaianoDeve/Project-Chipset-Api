@@ -13,7 +13,7 @@ export class RolesRepository implements IRolesRepository {
 		return !!role;
 	}
 
-	async saveRole(roleData: Role) {
+	async save(roleData: Role) {
 		const createdRole = await prisma.role.create({
 			data: roleData,
 		});

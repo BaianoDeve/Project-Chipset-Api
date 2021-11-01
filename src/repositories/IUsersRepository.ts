@@ -1,7 +1,7 @@
 import { User } from '@entities/User';
 
 export interface IUsersRepository {
-	findByUsername(username: string): Promise<User>;
-	saveUser(data: User): Promise<User>;
+	exists(username: string): Promise<boolean>;
+	save(data: User): Promise<User>;
 	getAllUsers(): Promise<User[]>;
 }

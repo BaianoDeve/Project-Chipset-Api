@@ -11,7 +11,7 @@ export class CreateRoleService {
 			throw new Error('Role already exists!');
 		}
 
-		const role = await this.rolesRepository.saveRole({ name, description });
+		const role = await this.rolesRepository.save({ name, description });
 
 		await this.rolesRepository.connectUserOnRole(userId, role.id);
 

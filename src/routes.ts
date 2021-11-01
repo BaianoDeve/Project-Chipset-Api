@@ -6,7 +6,7 @@ import { is } from '@middlewares/permissions';
 import { createUserFactory } from '@useCases/CreateUser';
 import { getUsersController } from '@useCases/GetUsers';
 import { sessionController } from '@useCases/Session';
-import { createRoleController } from '@useCases/CreateRole';
+import { createRoleFactory } from '@useCases/CreateRole';
 import { createConnectionUserRoleController } from '@useCases/CreateConnectionUserRole';
 import { createSubscriptionController } from '@useCases/CreateSubscription';
 import { getSubscriptionController } from '@useCases/GetSubscriptions';
@@ -37,7 +37,7 @@ router.post(
 	'/create_roles',
 	is(['admin']),
 	ensuredAuthenticated(),
-	(request, response) => createRoleController.handle(request, response)
+	(request, response) => createRoleFactory().handle(request, response)
 );
 
 router.post(

@@ -3,17 +3,17 @@ import { User } from '@entities/User';
 import { IUsersRepository } from '@repositories/IUsersRepository';
 
 export class UsersRepository implements IUsersRepository {
-	async findByUsername(username: string) {
+	async exists(username: string) {
 		const user = await prisma.user.findFirst({
 			where: {
 				username,
 			},
 		});
 
-		return user;
+		return !!user;
 	}
 
-	async saveUser(userData: User) {
+	async save(userData: User) {
 		const userCreate = await prisma.user.create({
 			data: userData,
 		});

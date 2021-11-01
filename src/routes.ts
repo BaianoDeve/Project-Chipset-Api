@@ -1,9 +1,9 @@
-import Router, { Request, Response } from 'express';
+import Router from 'express';
 
 import { ensuredAuthenticated } from '@middlewares/ensuredAuthenticated';
 import { is } from '@middlewares/permissions';
 
-import { createUserController } from '@useCases/CreateUser';
+import { createUserFactory } from '@useCases/CreateUser';
 import { getUsersController } from '@useCases/GetUsers';
 import { sessionController } from '@useCases/Session';
 import { createRoleController } from '@useCases/CreateRole';
@@ -17,19 +17,16 @@ const router = Router();
  * Users Routes
  */
 
-router.post('/create_users', (request: Request, response: Response) =>
-	createUserController.handle(request, response)
+router.post('/create_users', (request, response) =>
+	createUserFactory().handle(request, response)
 );
 
-router.post('/auth_users', (request: Request, response: Response) =>
+router.post('/auth_users', (request, response) =>
 	sessionController.handle(request, response)
 );
 
-router.get(
-	'/all_users',
-	ensuredAuthenticated(),
-	(request: Request, response: Response) =>
-		getUsersController.handle(request, response)
+router.get('/all_users', ensuredAuthenticated(), (request, response) =>
+	getUsersController.handle(request, response)
 );
 
 /*
@@ -40,15 +37,14 @@ router.post(
 	'/create_roles',
 	is(['admin']),
 	ensuredAuthenticated(),
-	(request: Request, response: Response) =>
-		createRoleController.handle(request, response)
+	(request, response) => createRoleController.handle(request, response)
 );
 
 router.post(
 	'/users_roles',
 	is(['admin']),
 	ensuredAuthenticated(),
-	async (request: Request, response: Response) =>
+	async (request, response) =>
 		createConnectionUserRoleController.handle(request, response)
 );
 
@@ -56,17 +52,15 @@ router.post(
  * Subscriptions Routes
  */
 
-router.post(
-	'/create_subcription',
-	async (request: Request, response: Response) =>
-		createSubscriptionController.handle(request, response)
+router.post('/create_subcription', async (request, response) =>
+	createSubscriptionController.handle(request, response)
 );
 
 router.get(
 	'/all_subcription',
 	is(['admin']),
 	ensuredAuthenticated(),
-	async (request: Request, response: Response) =>
+	async (request, response) =>
 		getSubscriptionController.handle(request, response)
 );
 

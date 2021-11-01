@@ -1,15 +1,16 @@
-import { prisma } from '@/prisma';
-import { IRolesRepository, Role } from '@repositories/IRolesRepository';
+import { prisma } from '@database/client';
+import { Role } from '@entities/Role';
+import { IRolesRepository } from '@repositories/IRolesRepository';
 
 export class RolesRepository implements IRolesRepository {
-	async findByName(roleName: string) {
+	async exists(roleName: string) {
 		const role = await prisma.role.findFirst({
 			where: {
 				name: roleName,
 			},
 		});
 
-		return role;
+		return !!role;
 	}
 
 	async saveRole(roleData: Role) {

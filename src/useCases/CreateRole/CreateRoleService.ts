@@ -5,7 +5,7 @@ export class CreateRoleService {
 	constructor(private rolesRepository: RolesRepository) {}
 
 	async execute({ name, description, userId }: CreateRoleRequestDTO) {
-		const roleAlreadyExists = await this.rolesRepository.findByName(name);
+		const roleAlreadyExists = await this.rolesRepository.exists(name);
 
 		if (roleAlreadyExists) {
 			throw new Error('Role already exists!');

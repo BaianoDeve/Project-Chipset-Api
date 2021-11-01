@@ -1,4 +1,4 @@
-import { prisma } from '@/prisma';
+import { prisma } from '@database/client';
 import { NextFunction, Request, Response } from 'express';
 
 export function is(rolesRoutes: string[]) {

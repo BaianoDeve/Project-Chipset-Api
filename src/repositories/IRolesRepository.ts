@@ -1,14 +1,13 @@
-import { Prisma, UsersOnRoles, User } from '@prisma/client';
+import { Role } from '@entities/Role';
+import { User } from '@entities/User';
 
-export type Role = Prisma.RoleCreateInput;
-
-export type UsersRoles = UsersOnRoles & {
+export type UsersRoles = {
 	user: User;
 	role: Role;
 };
 
 export interface IRolesRepository {
-	findByName(name: string): Promise<Role>;
+	exists(name: string): Promise<boolean>;
 	saveRole(data: Role): Promise<Role>;
 	connectUserOnRole(userId: string, roleId: string): Promise<UsersRoles>;
 }

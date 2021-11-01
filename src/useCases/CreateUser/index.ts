@@ -3,11 +3,14 @@ import { HashProvider } from '@providers/implementations/BcryptHashProvider';
 import { CreateUserService } from './CreateUserService';
 import { CreateUserController } from './CreateUserController';
 
-const usersRepository = new UsersRepository();
-const hashProvider = new HashProvider(8);
+const createUserFactory = () => {
+	const usersRepository = new UsersRepository();
+	const hashProvider = new HashProvider(8);
 
-const createUserService = new CreateUserService(usersRepository, hashProvider);
+	const createUser = new CreateUserService(usersRepository, hashProvider);
+	const createUserController = new CreateUserController(createUser);
 
-const createUserController = new CreateUserController(createUserService);
+	return createUserController;
+};
 
-export { createUserService, createUserController };
+export { createUserFactory };

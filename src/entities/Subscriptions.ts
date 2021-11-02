@@ -8,44 +8,12 @@ export class Subscription {
 	service: string;
 	system?: string;
 
-	private constructor({
-		name,
-		email,
-		equipament,
-		phone,
-		school,
-		service,
-		system,
-	}: Subscription) {
-		return Object.assign(this, {
-			name,
-			email,
-			equipament,
-			phone,
-			school,
-			service,
-			system,
-		});
+	private constructor(props: Subscription) {
+		return Object.assign(this, props);
 	}
 
-	static create({
-		name,
-		email,
-		equipament,
-		phone,
-		school,
-		service,
-		system,
-	}: Subscription) {
-		const subscription = new Subscription({
-			name,
-			email,
-			equipament,
-			phone,
-			school,
-			service,
-			system,
-		});
+	static create(props: Subscription) {
+		const subscription = new Subscription(props);
 		return subscription;
 	}
 }

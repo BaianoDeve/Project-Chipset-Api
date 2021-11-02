@@ -3,15 +3,12 @@ export class Role {
 	name: string;
 	description: string;
 
-	private constructor({ name, description }: Role) {
-		return Object.assign(this, {
-			name,
-			description,
-		});
+	private constructor(props: Role) {
+		return Object.assign(this, props);
 	}
 
-	static create({ name, description }: Role) {
-		const role = new Role({ name, description });
+	static create(props: Role) {
+		const role = new Role(props);
 		return role;
 	}
 }

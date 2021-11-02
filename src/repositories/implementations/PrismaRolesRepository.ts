@@ -4,7 +4,7 @@ import { IRolesRepository } from '@repositories/IRolesRepository';
 
 export class RolesRepository implements IRolesRepository {
 	async exists(roleName: string) {
-		const role = await prisma.role.findFirst({
+		const role = await prisma.role.findUnique({
 			where: {
 				name: roleName,
 			},

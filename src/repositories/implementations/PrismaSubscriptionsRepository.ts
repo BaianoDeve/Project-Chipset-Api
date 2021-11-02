@@ -4,7 +4,7 @@ import { ISubscriptionsRepository } from '@repositories/ISubscriptionsRepository
 
 export class SubscriptionsRepository implements ISubscriptionsRepository {
 	async exists(email: string) {
-		const subscription = await prisma.subscription.findFirst({
+		const subscription = await prisma.subscription.findUnique({
 			where: {
 				email,
 			},

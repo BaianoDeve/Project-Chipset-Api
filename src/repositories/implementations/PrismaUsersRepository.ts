@@ -4,7 +4,7 @@ import { IUsersRepository } from '@repositories/IUsersRepository';
 
 export class UsersRepository implements IUsersRepository {
 	async exists(username: string) {
-		const user = await prisma.user.findFirst({
+		const user = await prisma.user.findUnique({
 			where: {
 				username,
 			},
@@ -28,7 +28,7 @@ export class UsersRepository implements IUsersRepository {
 	}
 
 	async findByUsername(username: string) {
-		const user = await prisma.user.findFirst({
+		const user = await prisma.user.findUnique({
 			where: {
 				username,
 			},

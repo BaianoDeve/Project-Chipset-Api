@@ -57,7 +57,7 @@ router.post('/create_subcription', (request, response) =>
 );
 
 router.get(
-	'/all_subcription',
+	'/all_subcriptions',
 	is(['admin']),
 	ensuredAuthenticated(),
 	(request, response) => getAllSubscriptionsFactory().handle(request, response)

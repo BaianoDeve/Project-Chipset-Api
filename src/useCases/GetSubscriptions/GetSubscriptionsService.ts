@@ -4,8 +4,7 @@ export class GetSubscriptionsService {
 	constructor(private subscriptionsRepository: SubscriptionsRepository) {}
 
 	async execute() {
-		const subscriptions =
-			await this.subscriptionsRepository.getAllSubscriptions();
+		const subscriptions = await this.subscriptionsRepository.getAll();
 
 		return subscriptions;
 	}

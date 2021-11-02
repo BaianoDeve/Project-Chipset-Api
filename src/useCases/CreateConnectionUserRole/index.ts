@@ -2,13 +2,15 @@ import { RolesRepository } from '@repositories/implementations/PrismaRolesReposi
 import { CreateConnectionUserRoleService } from './CreateConnectionUserRoleService';
 import { CreateConnectionUserRoleController } from './CreateConnectionUserRoleController';
 
-const rolesRepository = new RolesRepository();
+const createConnectionUserRoleFactory = () => {
+	const rolesRepository = new RolesRepository();
+	const createConnectionUserRole = new CreateConnectionUserRoleService(
+		rolesRepository
+	);
+	const createConnectionUserRoleController =
+		new CreateConnectionUserRoleController(createConnectionUserRole);
 
-const createConnectionUserRoleService = new CreateConnectionUserRoleService(
-	rolesRepository
-);
+	return createConnectionUserRoleController;
+};
 
-const createConnectionUserRoleController =
-	new CreateConnectionUserRoleController(createConnectionUserRoleService);
-
-export { createConnectionUserRoleService, createConnectionUserRoleController };
+export { createConnectionUserRoleFactory };

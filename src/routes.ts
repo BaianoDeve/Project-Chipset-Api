@@ -4,12 +4,12 @@ import { ensuredAuthenticated } from '@middlewares/ensuredAuthenticated';
 import { is } from '@middlewares/permissions';
 
 import { createUserFactory } from '@useCases/CreateUser';
-import { getUsersController } from '@useCases/GetUsers';
-import { sessionController } from '@useCases/Session';
+import { getAllUsersFactory } from '@useCases/GetUsers';
+import { sessionFactory } from '@useCases/Session';
 import { createRoleFactory } from '@useCases/CreateRole';
-import { createConnectionUserRoleController } from '@useCases/CreateConnectionUserRole';
-import { createSubscriptionController } from '@useCases/CreateSubscription';
-import { getSubscriptionController } from '@useCases/GetSubscriptions';
+import { createConnectionUserRoleFactory } from '@useCases/CreateConnectionUserRole';
+import { createSubscriptionFactory } from '@useCases/CreateSubscription';
+import { getAllSubscriptionsFactory } from '@useCases/GetSubscriptions';
 
 const router = Router();
 
@@ -22,11 +22,11 @@ router.post('/create_users', (request, response) =>
 );
 
 router.post('/auth_users', (request, response) =>
-	sessionController.handle(request, response)
+	sessionFactory().handle(request, response)
 );
 
 router.get('/all_users', ensuredAuthenticated(), (request, response) =>
-	getUsersController.handle(request, response)
+	getAllUsersFactory().handle(request, response)
 );
 
 /*
@@ -44,24 +44,23 @@ router.post(
 	'/users_roles',
 	is(['admin']),
 	ensuredAuthenticated(),
-	async (request, response) =>
-		createConnectionUserRoleController.handle(request, response)
+	(request, response) =>
+		createConnectionUserRoleFactory().handle(request, response)
 );
 
 /*
  * Subscriptions Routes
  */
 
-router.post('/create_subcription', async (request, response) =>
-	createSubscriptionController.handle(request, response)
+router.post('/create_subcription', (request, response) =>
+	createSubscriptionFactory().handle(request, response)
 );
 
 router.get(
 	'/all_subcription',
 	is(['admin']),
 	ensuredAuthenticated(),
-	async (request, response) =>
-		getSubscriptionController.handle(request, response)
+	(request, response) => getAllSubscriptionsFactory().handle(request, response)
 );
 
 export { router };

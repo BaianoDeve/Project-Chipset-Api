@@ -1,21 +1,19 @@
 import { prisma } from '@database/client';
-import {
-	ISubscriptionsRepository,
-	Subscription,
-} from '@repositories/ISubscriptionsRepository';
+import { Subscription } from '@entities/Subscriptions';
+import { ISubscriptionsRepository } from '@repositories/ISubscriptionsRepository';
 
 export class SubscriptionsRepository implements ISubscriptionsRepository {
-	async findByEmail(email: string) {
+	async exists(email: string) {
 		const subscription = await prisma.subscription.findFirst({
 			where: {
 				email,
 			},
 		});
 
-		return subscription;
+		return !!subscription;
 	}
 
-	async saveSubscription(subscriptionData: Subscription) {
+	async save(subscriptionData: Subscription) {
 		const subscriptionCreate = await prisma.subscription.create({
 			data: subscriptionData,
 		});
@@ -23,7 +21,7 @@ export class SubscriptionsRepository implements ISubscriptionsRepository {
 		return subscriptionCreate;
 	}
 
-	async getAllSubscriptions() {
+	async getAll() {
 		const subscriptions = await prisma.subscription.findMany();
 
 		return subscriptions;

@@ -1,3 +1,4 @@
+import { Role } from '@entities/Role';
 import { RolesRepository } from '@repositories/implementations/PrismaRolesRepository';
 import { CreateRoleRequestDTO } from './CreateRoleDTO';
 
@@ -11,7 +12,8 @@ export class CreateRoleService {
 			throw new Error('Role already exists!');
 		}
 
-		const role = await this.rolesRepository.save({ name, description });
+		const roleCreate = Role.create({ name, description });
+		const role = await this.rolesRepository.save(roleCreate);
 
 		await this.rolesRepository.connectUserOnRole(userId, role.id);
 

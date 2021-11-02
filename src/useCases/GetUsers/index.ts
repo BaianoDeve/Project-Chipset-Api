@@ -2,10 +2,12 @@ import { UsersRepository } from '@repositories/implementations/PrismaUsersReposi
 import { GetUsersService } from './GetUsersService';
 import { GetUsersController } from './GetUsersController';
 
-const usersRepository = new UsersRepository();
+const getAllUsersFactory = () => {
+	const usersRepository = new UsersRepository();
+	const getAllUsers = new GetUsersService(usersRepository);
+	const getUsersController = new GetUsersController(getAllUsers);
 
-const getUsersService = new GetUsersService(usersRepository);
+	return getUsersController;
+};
 
-const getUsersController = new GetUsersController(getUsersService);
-
-export { getUsersService, getUsersController };
+export { getAllUsersFactory };

@@ -3,8 +3,8 @@ import { UsersRepository } from '@repositories/implementations/PrismaUsersReposi
 export class GetUsersService {
 	constructor(private usersRepository: UsersRepository) {}
 
-	async execute(userId: string) {
-		const users = await this.usersRepository.getAllUsers();
+	async execute() {
+		const users = await this.usersRepository.getAll();
 		return users;
 	}
 }

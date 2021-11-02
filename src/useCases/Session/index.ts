@@ -3,11 +3,13 @@ import { UsersRepository } from '@repositories/implementations/PrismaUsersReposi
 import { SessionService } from './SessionService';
 import { SessionController } from './SessionController';
 
-const usersRepository = new UsersRepository();
-const hashProvider = new HashProvider(8);
+const sessionFactory = () => {
+	const usersRepository = new UsersRepository();
+	const hashProvider = new HashProvider(8);
+	const session = new SessionService(usersRepository, hashProvider);
+	const sessionController = new SessionController(session);
 
-const sessionService = new SessionService(usersRepository, hashProvider);
+	return sessionController;
+};
 
-const sessionController = new SessionController(sessionService);
-
-export { sessionService, sessionController };
+export { sessionFactory };

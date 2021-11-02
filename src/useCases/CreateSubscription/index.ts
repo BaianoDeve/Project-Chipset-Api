@@ -2,14 +2,16 @@ import { SubscriptionsRepository } from '@repositories/implementations/PrismaSub
 import { CreateSubscriptionService } from './CreateSubscriptionService';
 import { CreateSubscriptionController } from './CreateSubscriptionController';
 
-const subscriptionsRepository = new SubscriptionsRepository();
+const createSubscriptionFactory = () => {
+	const subscriptionsRepository = new SubscriptionsRepository();
+	const createSubscription = new CreateSubscriptionService(
+		subscriptionsRepository
+	);
+	const createSubscriptionController = new CreateSubscriptionController(
+		createSubscription
+	);
 
-const createSubscriptionService = new CreateSubscriptionService(
-	subscriptionsRepository
-);
+	return createSubscriptionController;
+};
 
-const createSubscriptionController = new CreateSubscriptionController(
-	createSubscriptionService
-);
-
-export { createSubscriptionService, createSubscriptionController };
+export { createSubscriptionFactory };

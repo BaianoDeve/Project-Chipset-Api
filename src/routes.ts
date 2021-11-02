@@ -7,6 +7,7 @@ import { createUserFactory } from '@useCases/CreateUser';
 import { getAllUsersFactory } from '@useCases/GetUsers';
 import { sessionFactory } from '@useCases/Session';
 import { createRoleFactory } from '@useCases/CreateRole';
+import { getAllRolesFactory } from '@useCases/GetRoles';
 import { createConnectionUserRoleFactory } from '@useCases/CreateConnectionUserRole';
 import { createSubscriptionFactory } from '@useCases/CreateSubscription';
 import { getAllSubscriptionsFactory } from '@useCases/GetSubscriptions';
@@ -46,6 +47,13 @@ router.post(
 	ensuredAuthenticated(),
 	(request, response) =>
 		createConnectionUserRoleFactory().handle(request, response)
+);
+
+router.post(
+	'/all_roles',
+	is(['admin']),
+	ensuredAuthenticated(),
+	(request, response) => getAllRolesFactory().handle(request, response)
 );
 
 /*

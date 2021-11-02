@@ -21,6 +21,12 @@ export class RolesRepository implements IRolesRepository {
 		return createdRole;
 	}
 
+	async getAll() {
+		const roles = await prisma.role.findMany();
+
+		return roles;
+	}
+
 	async connectUserOnRole(userId: string, roleId: string) {
 		const connect = await prisma.usersOnRoles.create({
 			data: {
